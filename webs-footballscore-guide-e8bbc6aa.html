@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>足球比分 · 实时赛事杂志</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: #f4f8fa;
+      color: #1b2b36;
+      line-height: 1.6;
+      padding: 0 1.25rem 3rem;
+    }
+
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* ——— 横幅 hero ——— */
+    .hero {
+      margin: 1.8rem 0 2.2rem;
+      background: linear-gradient(145deg, #e0f0f5 0%, #c8e3ec 100%);
+      border-radius: 2.5rem;
+      padding: 3rem 2rem 2.8rem;
+      box-shadow: 0 12px 28px rgba(42, 89, 102, 0.08);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      right: -20%;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(60, 140, 160, 0.20) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .hero h1 {
+      font-size: 2.6rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: #0e3b47;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero .sub {
+      display: inline-block;
+      margin-top: 0.6rem;
+      padding: 0.3rem 1.2rem;
+      background: #1b5b6b;
+      color: #e6f3f7;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    /* ——— 背景说明卡 ——— */
+    .context-card {
+      background: #ffffff;
+      border-left: 6px solid #2b8ca3;
+      border-radius: 20px;
+      padding: 1.8rem 2rem;
+      margin: 2.2rem 0 2.8rem;
+      box-shadow: 0 6px 16px rgba(30, 80, 95, 0.06);
+    }
+
+    .context-card p {
+      font-size: 1.05rem;
+      color: #1f3c47;
+    }
+
+    .context-card strong {
+      color: #156573;
+    }
+
+    /* ——— 杂志式三段网格卡片 ——— */
+    .magazine {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.8rem;
+      margin-bottom: 2.8rem;
+    }
+
+    @media (min-width: 680px) {
+      .magazine {
+        grid-template-columns: 1fr 1fr;
+      }
+      .magazine .card:first-child {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (min-width: 900px) {
+      .magazine {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+      .magazine .card:first-child {
+        grid-column: auto;
+      }
+    }
+
+    .card {
+      background: white;
+      border-radius: 28px;
+      padding: 2rem 1.8rem 2.2rem;
+      box-shadow: 0 8px 20px rgba(38, 94, 110, 0.06);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 28px rgba(38, 94, 110, 0.10);
+    }
+
+    .card .tag {
+      display: inline-block;
+      background: #d7ecf2;
+      color: #115d6d;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.2rem 1rem;
+      border-radius: 30px;
+      margin-bottom: 0.8rem;
+      align-self: flex-start;
+    }
+
+    .card h3 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 0.9rem;
+      color: #0b3b47;
+    }
+
+    .card p {
+      color: #2b4a56;
+      margin-bottom: 0.6rem;
+      flex: 1;
+    }
+
+    .card .source {
+      font-size: 0.9rem;
+      color: #4c7a88;
+      border-top: 1px dashed #cde0e7;
+      padding-top: 1rem;
+      margin-top: 0.8rem;
+    }
+
+    /* ——— 页尾访问提示 ——— */
+    .footer-note {
+      background: #e6f1f5;
+      border-radius: 40px;
+      padding: 2rem 2.2rem;
+      margin-top: 1.8rem;
+      text-align: center;
+      font-size: 1.05rem;
+      color: #1d404e;
+      border: 1px solid #bdd8e2;
+    }
+
+    .footer-note a {
+      color: #116475;
+      text-decoration: none;
+      font-weight: 600;
+      border-bottom: 2px solid #96c3d2;
+      transition: border-color 0.2s;
+    }
+
+    .footer-note a:hover {
+      border-bottom-color: #0a4b5a;
+    }
+
+    /* ——— 小型 FAQ 摘要 ——— */
+    .faq-mini {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 2rem 0 1.5rem;
+    }
+
+    .faq-mini details {
+      background: white;
+      border-radius: 40px;
+      padding: 0.6rem 1.2rem;
+      flex: 1 1 200px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+      border: 1px solid #d2e3ea;
+    }
+
+    .faq-mini summary {
+      font-weight: 600;
+      color: #135f70;
+      cursor: pointer;
+      padding: 0.2rem 0;
+    }
+
+    .faq-mini details p {
+      margin-top: 0.5rem;
+      color: #2c505e;
+      font-size: 0.95rem;
+      padding: 0 0.2rem 0.4rem;
+    }
+
+    /* ——— 通用调整 ——— */
+    .small-meta {
+      color: #4b7a88;
+      font-size: 0.85rem;
+      margin-top: 1rem;
+    }
+
+    hr {
+      border: 0;
+      border-top: 1px solid #d1e2ea;
+      margin: 2rem 0;
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- hero -->
+  <header class="hero">
+    <h1>⚽ 球场内外 · 比分杂志</h1>
+    <span class="sub">实时 · 深度 · 联赛脉搏</span>
+  </header>
+
+  <!-- 背景说明 -->
+  <div class="context-card">
+    <p><strong>足球比分</strong> 不只是数字跳动，它是一支球队90分钟战术的缩影，也是无数球迷情绪起伏的锚点。从草根青训到五大联赛，每一组比分背后都藏着教练的博弈、球员的坚持，以及足球文化最真实的温度。这里不制造焦虑，也不渲染神话，只提供诚实、清晰的赛果记录与赛况梳理。</p>
+  </div>
+
+  <!-- 三段自然介绍 · 杂志网格 -->
+  <div class="magazine">
+    <!-- 卡片1 -->
+    <article class="card">
+      <span class="tag">🏆 联赛速写</span>
+      <h3>从北伦敦到梅阿查</h3>
+      <p>周中的欧战与周末的国内联赛交织，密集赛程让每一场比分都更具分量。我们持续追踪英超、意甲、西甲、德甲、法甲以及欧冠、欧联的最新战报，用冷静的视角呈现赛果背后的战术变化与轮换逻辑。</p>
+      <div class="source">覆盖30+主流赛事 · 每日更新</div>
+    </article>
+
+    <!-- 卡片2 -->
+    <article class="card">
+      <span class="tag">📊 数据切片</span>
+      <h3>不止是主客队数字</h3>
+      <p>控球率、射正次数、角球与犯规分布——比分是结果，但过程同样值得细读。我们整理简洁的赛事实况摘要，帮助你在几分钟内把握比赛走向，不遗漏关键转折。</p>
+      <div class="source">半场 & 全场数据对照</div>
+    </article>
+
+    <!-- 卡片3 -->
+    <article class="card">
+      <span class="tag">🌍 球迷视角</span>
+      <h3>你的主队，此刻怎样</h3>
+      <p>无论是深夜守候的欧冠淘汰赛，还是周末午后的一场中游对决，每场比分都对应着无数屏幕前的表情。我们相信，比分新闻也可以有生活气息，不冰冷、不浮夸。</p>
+      <div class="source">关注升降级、德比、新星表现</div>
+    </article>
+  </div>
+
+  <!-- 小型FAQ摘要 增加内容层次 -->
+  <div class="faq-mini">
+    <details>
+      <summary>⚡ 比分更新频率？</summary>
+      <p>比赛进行中实时推送，终场后第一时间确认最终比分。涵盖进球、红黄牌、换人等关键事件。</p>
+    </details>
+    <details>
+      <summary>📅 是否包含历史对阵？</summary>
+      <p>提供近期交锋记录与赛季场均数据，方便回顾两队过往碰撞的比分脉络。</p>
+    </details>
+    <details>
+      <summary>📱 移动端适配如何？</summary>
+      <p>页面采用响应式设计，手机与平板均可流畅浏览赛事列表与详情。</p>
+    </details>
+  </div>
+
+  <!-- 页尾访问提示 • 嵌入关键链接 -->
+  <div class="footer-note">
+    <p>如果你习惯在每个周末翻阅赛果，或者想在深夜快速知晓欧冠比分，不妨把 <a href="https://webs-footballscore.com">足球比分</a> 当作一个安静的起点。没有弹窗干扰，没有浮夸标题，只有干净的赛果与适度的背景笔记。</p>
+    <p class="small-meta">—— 从一场比分开始，读懂整片绿茵 ——</p>
+  </div>
+
+  <hr>
+  <p style="text-align: center; color: #5a818e; font-size: 0.9rem;">杂志专题 · 足球比分内容角落</p>
+</div>
+</body>
+</html>
