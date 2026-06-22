@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+  <title>中彩网 · 知识库介绍页</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', sans-serif;
+      background: #f6fafb;
+      color: #1e2b2f;
+      line-height: 1.65;
+      padding: 1.2rem 1rem 2.5rem;
+    }
+
+    .wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    /* 开篇 Hero —— 温和索引感 */
+    .hero {
+      background: linear-gradient(125deg, #d4ecee 0%, #b7dfe3 100%);
+      border-radius: 28px 28px 24px 24px;
+      padding: 2.2rem 1.8rem 2.4rem;
+      margin-bottom: 2.2rem;
+      box-shadow: 0 6px 16px rgba(25, 100, 110, 0.08);
+    }
+
+    .hero h1 {
+      font-size: 2.1rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: #0d3c42;
+      margin-bottom: 0.9rem;
+    }
+
+    .hero h1 small {
+      font-size: 1rem;
+      font-weight: 350;
+      color: #28676e;
+      margin-left: 0.7rem;
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      max-width: 680px;
+      color: #1d4f57;
+      margin-bottom: 0.4rem;
+    }
+
+    .hero .tagline {
+      display: inline-block;
+      background: #ffffffcc;
+      backdrop-filter: blur(2px);
+      padding: 0.35rem 1.2rem;
+      border-radius: 40px;
+      font-size: 0.92rem;
+      color: #0b464e;
+      border: 1px solid #c6e2e6;
+      margin-top: 0.6rem;
+    }
+
+    /* 网格卡片 —— 目录感布局 */
+    .grid-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 1.6rem 1.2rem 1.5rem;
+      box-shadow: 0 3px 12px rgba(25, 80, 90, 0.05);
+      border: 1px solid #ddeef0;
+      transition: transform 0.15s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0, 70, 80, 0.06);
+      border-color: #aad3d9;
+    }
+
+    .card h3 {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #09545e;
+      margin-bottom: 0.7rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .card h3::before {
+      content: "▹";
+      font-size: 1.3rem;
+      color: #359aa8;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: #2b555c;
+      margin-bottom: 0.6rem;
+    }
+
+    .card .meta-tag {
+      display: inline-block;
+      background: #e9f3f5;
+      color: #16636e;
+      padding: 0.15rem 0.9rem;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      letter-spacing: 0.02em;
+      margin-top: 0.5rem;
+    }
+
+    /* 说明区 + 提示区 双栏 */
+    .double-panel {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.6rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .panel {
+      flex: 1 1 260px;
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 1.6rem 1.4rem 1.7rem;
+      border: 1px solid #dbedf0;
+      box-shadow: 0 2px 10px rgba(30, 70, 75, 0.02);
+    }
+
+    .panel h2 {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #054e58;
+      border-bottom: 2px solid #bcdbe0;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .panel ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .panel li {
+      margin-bottom: 0.55rem;
+      padding-left: 1.3rem;
+      position: relative;
+      color: #1e4a51;
+    }
+
+    .panel li::before {
+      content: "•";
+      color: #2d9baa;
+      font-weight: 600;
+      position: absolute;
+      left: 0.1rem;
+    }
+
+    .tip-box {
+      background: #e6f4f6;
+      border-radius: 18px;
+      padding: 1rem 1.2rem;
+      border-left: 5px solid #3399a8;
+      margin-top: 0.8rem;
+      font-size: 0.95rem;
+      color: #12444c;
+    }
+
+    .tip-box strong {
+      color: #045a65;
+    }
+
+    /* 相关信息区：FAQ 摘要风格 */
+    .info-section {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 1.6rem 1.6rem 1.8rem;
+      border: 1px solid #d3e8ec;
+      margin-bottom: 2.2rem;
+    }
+
+    .info-section h2 {
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: #054e58;
+      margin-bottom: 1.2rem;
+    }
+
+    .faq-item {
+      padding: 0.65rem 0;
+      border-bottom: 1px dashed #c5dfe4;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+
+    .faq-q {
+      font-weight: 500;
+      color: #0b5b66;
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .faq-q::before {
+      content: "Q";
+      background: #cde8ed;
+      color: #126d7a;
+      font-weight: 600;
+      font-size: 0.8rem;
+      width: 22px;
+      height: 22px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 40px;
+      flex-shrink: 0;
+    }
+
+    .faq-a {
+      color: #295c64;
+      padding-left: 2.1rem;
+      font-size: 0.93rem;
+      margin-top: 0.2rem;
+    }
+
+    /* 嵌入链接句子 */
+    .sentence-link {
+      background: #eff7f9;
+      border-radius: 18px;
+      padding: 0.9rem 1.3rem;
+      margin: 1.2rem 0 1.8rem;
+      font-size: 1rem;
+      border: 1px solid #c7e1e6;
+    }
+
+    .sentence-link a {
+      color: #0d6977;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid #3299aa;
+      padding-bottom: 0.05rem;
+    }
+
+    .sentence-link a:hover {
+      background: #c7e9ef;
+      border-bottom-width: 2px;
+    }
+
+    /* 页脚 */
+    .footnote {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #54858d;
+      border-top: 1px solid #c9e1e5;
+      padding-top: 1.4rem;
+      margin-top: 1.5rem;
+    }
+
+    /* 响应式微调 */
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 1.65rem;
+      }
+      .hero {
+        padding: 1.6rem 1.2rem;
+      }
+      .double-panel {
+        flex-direction: column;
+      }
+      .grid-cards {
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- Hero 介绍 -->
+  <div class="hero">
+    <h1>中彩网 <small>· 知识库入口</small></h1>
+    <p>如果你刚接触这个站点，想快速了解它的内容方向和常见用途，这里整理了一份温和的导航指引。不用四处翻找，从这几块信息就能大致把握全貌。</p>
+    <div class="tagline">📚 信息目录 · 说明 · 提示 · 相关</div>
+  </div>
+
+  <!-- 网格卡片：目录感布局 -->
+  <div class="grid-cards">
+    <div class="card">
+      <h3>站点定位</h3>
+      <p>一个围绕特定领域提供信息聚合与索引的页面集合，并非单一工具或博客。内容偏重知识梳理与轻量参考。</p>
+      <span class="meta-tag">信息门户</span>
+    </div>
+    <div class="card">
+      <h3>常见内容</h3>
+      <p>涵盖分类导航、条目说明、使用提示以及相关资源摘要，结构清晰，适合想快速检索的人。</p>
+      <span class="meta-tag">目录式</span>
+    </div>
+    <div class="card">
+      <h3>浏览方式</h3>
+      <p>无需注册或登录，所有页面均开放阅读。推荐使用手机或电脑浏览器直接打开，自适应排版。</p>
+      <span class="meta-tag">无障碍</span>
+    </div>
+    <div class="card">
+      <h3>更新习惯</h3>
+      <p>内容按模块迭代，不固定时间推送。如果你发现某些信息有变化，可能只是常规调整。</p>
+      <span class="meta-tag">渐进维护</span>
+    </div>
+  </div>
+
+  <!-- 双栏：说明区 + 提示区 -->
+  <div class="double-panel">
+    <div class="panel">
+      <h2>📋 简要说明</h2>
+      <ul>
+        <li>页面围绕“识别用途”设计，每个区块有独立主题。</li>
+        <li>不提供下载、交易或账户功能，纯粹的信息展示。</li>
+        <li>移动端与桌面均适配，字体和间距已做响应优化。</li>
+        <li>蓝绿色点缀用于区分模块，不依赖图片加载。</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h2>💡 提示参考</h2>
+      <ul>
+        <li>首次浏览可从上方网格卡片开始，快速了解分类。</li>
+        <li>下方 FAQ 摘要收录了几个常见疑问，供你参考。</li>
+        <li>如果遇到打不开或样式异常，可尝试刷新或更换浏览器。</li>
+      </ul>
+      <div class="tip-box">
+        <strong>小建议：</strong> 如果你在寻找更具体的主题，不妨先看看“相关信息区”的条目，或许能节省时间。
+      </div>
+    </div>
+  </div>
+
+  <!-- 句子中嵌入中彩网链接 -->
+  <div class="sentence-link">
+    ▸ 如果你想直接进入站点浏览，可以访问 <a href="https://webs-cn-zhcw.com">中彩网</a>，页面会以简洁的界面呈现。
+  </div>
+
+  <!-- 相关信息区：FAQ 摘要 -->
+  <div class="info-section">
+    <h2>🔍 相关信息 · FAQ 摘要</h2>
+    <div class="faq-item">
+      <div class="faq-q">这个网站主要提供什么？</div>
+      <div class="faq-a">主要是信息分类与知识索引，围绕固定主题整理成多个独立页面，方便参考和查阅。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">需要安装软件或注册吗？</div>
+      <div class="faq-a">不需要。直接在浏览器里打开即可阅读全部内容，没有注册或下载要求。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">页面上的颜色和卡片有什么含义？</div>
+      <div class="faq-a">蓝绿色调用于划分区块，卡片布局代表不同知识入口，没有特殊隐喻，只为阅读舒适。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">内容多久更新一次？</div>
+      <div class="faq-a">不定期维护，根据信息本身的变化做调整。没有固定的更新周期。</div>
+    </div>
+  </div>
+
+  <!-- 页脚 -->
+  <div class="footnote">
+    本页仅为信息介绍 · 内容保持克制与客观 · 无诱导或承诺
+  </div>
+
+</div>
+</body>
+</html>
